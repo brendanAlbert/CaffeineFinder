@@ -1,8 +1,10 @@
 package edu.orangecoastcollege.cs273.caffeinefinder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -89,7 +91,13 @@ public class CaffeineListActivity extends AppCompatActivity implements OnMapRead
     }
 
     public void viewLocationDetails(View v) {
-
+        if (v instanceof LinearLayout) {
+            LinearLayout selectedLayout = (LinearLayout) v;
+            Location selectedLocation = (Location) selectedLayout.getTag();
+            Intent detailsIntent = new Intent(this, LocationDetailsActivity.class);
+            detailsIntent.putExtra("SelectedLocation",selectedLocation);
+            startActivity(detailsIntent);
+        }
     }
 
     // TODO: (3) Implement the onMapReady method, which will add a special "marker" for our current location,
